@@ -1,2 +1,7 @@
-# web-push
-using web-push npm to send push notification
+# Web Push Demo
+
+
+
+## Getting started
+
+http://localhost:4000/index.html  
