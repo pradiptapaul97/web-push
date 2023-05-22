@@ -4,4 +4,4 @@
 
 ## Getting started
 
-http://localhost:4000/index.html  
+https://pradipta-web-push.onrender.com/
