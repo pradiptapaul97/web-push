@@ -32,30 +32,21 @@ if(process.env.PUBLIC_VAPID_KEY == '' || process.env.PRIVATE_VAPID_KEY == '')
     privateVapidKey = vapidKeys.privateKey;
   }
 }
+
+// Replace with your email
+webpush.setVapidDetails('mailto:pradipta.paul@webskitters.com', publicVapidKey, privateVapidKey);
   
 
-app.post('/subscribe', async (req, res) => {
+app.post('/subscribe', (req, res) => {
+  const subscription = req.body;
+  res.status(201).json({});
+  const payload = JSON.stringify({ title: 'You got a new client' });
 
-  try {
+  //console.log(subscription,"subscription");
 
-    // Replace with your email
-    await webpush.setVapidDetails('mailto:ppradipta65@gmail.com', publicVapidKey, privateVapidKey);
-
-    const subscription = req.body;
-    const payload = JSON.stringify({ title: 'You got a new client', body: "Contact with them" });
-
-    //console.log(subscription,"subscription");
-
-    let datas = await webpush.sendNotification(subscription, payload).catch(error => {
-      console.error(error.stack);
-    });
-
-    console.log(datas);
-
-    return { status:200 , data: datas , messege:"Done"}
-  } catch (error) {
-    return { status:500 , data: {}, messege:error.messege}
-  }
+  webpush.sendNotification(subscription, payload).catch(error => {
+    console.error(error.stack);
+  });
 });
 
 app.use(require('express-static')('./'));

@@ -53,7 +53,7 @@ $(document).ready(function () {
       //console.log('Sending push');
       await fetch('/subscribe', {
         method: 'POST',
-        body: JSON.parse(subscription),
+        body: JSON.stringify(subscription),
         headers: {
           'content-type': 'application/json'
         }
